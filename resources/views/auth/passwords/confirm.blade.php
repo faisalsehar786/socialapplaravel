@@ -3,15 +3,28 @@
 @section('title', 'login')
 @section('content')
 <main class="ant-layout-content app-login p-15">
-    <h1 class="logo"><img src="{{ asset('frontend/assets') }}/img/logo.svg" alt="Logo"></h1>
+    <h1 class="logo">
+
+     @php 
+                          $settings=App\Settings::first(); 
+
+                         @endphp
+                         @if (isset($settings) && !empty($settings->headerlogo))
+                          <img src="{{ asset('frontend/assets') }}/img/{{ $settings->headerlogo }}" class="mt-5" alt="Logo">
+                         @else
+                          <img src="{{ asset('frontend/assets') }}/img/footer-logo.png" alt="Logo">
+                         @endif
+
+
+    </h1>
     <div class="ant-row">
         <div class="ant-col ant-col-24">
             <form id="basic" class="ant-form ant-form-horizontal" action="{{ route('password.confirm') }}" method="Post">
                 @csrf
 
           
-                <div class="login-section">
-                    <h1 class="login-title">{{ __('Confirm Password') }}</h1>
+                <div class="login-section" @if(isset($settings) && !empty($settings->sectioncolor)) style="background:{{ $settings->sectioncolor }} !important" @endif>
+                    <h1 class="login-title" @if(isset($settings) && !empty($settings->borderpanelcolor)) style="background:{{ $settings->borderpanelcolor }} !important" @endif>{{ __('Confirm Password') }}</h1>
                     <div class="p-15">
                          @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -64,10 +77,10 @@
                     <div class="ant-col ant-col-16 ant-col-offset-8 ant-form-item-control">
                         <div class="ant-form-item-control-input">
                             <div class="ant-form-item-control-input-content">
-                                <button type="submit" class="ant-btn ant-btn-primary"><span>{{ __('Confirm Password') }}</span></button>
+                                <button type="submit" class="ant-btn ant-btn-primary"  @if(isset($settings) && !empty($settings->buttoncolor)) style="background:{{ $settings->buttoncolor }} !important" @endif><span>{{ __('Confirm Password') }}</span></button>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </form>
         </div>

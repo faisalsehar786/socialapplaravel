@@ -45,22 +45,51 @@
             }
         </style>
     </head>
+      @php
+      $settings=App\Settings::first(); 
+
+      @endphp
     <body data-new-gr-c-s-check-loaded="14.1003.0" data-gr-ext-installed="">
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root">
             <div class="App">
-                <section class="ant-layout">
+                <section class="ant-layout" @if(isset($settings) && !empty($settings->backgroundcolor)) style="background:{{ $settings->backgroundcolor }} !important" @endif>
                       @include('includes-frontend.frontEndAlerts')
                       @yield('content')
                     
-                    <footer class="ant-layout-footer">
-                        <div class="footer-logo"><img src="{{ asset('frontend/assets') }}/img/footer-logo.png" alt="logo"></div>
-                        <div class="contact"><span style="font-family: GothamBook; font-size: 12px;">Liên hệ với chúng tôi:</span></div>
-                        <div class="social-wrap">
-                            <a href="http://facebook.com/tapply.vn"><img class="icon" src="{{ asset('frontend/assets') }}/img/fb-contact.png" alt="facebook"></a>
-                            <a href="http://m.me/tapply.vn"><img class="icon" src="{{ asset('frontend/assets') }}/img/message-contact.png" alt="facebook"></a>
+                    <footer class="ant-layout-footer"  @if(isset($settings) && !empty($settings->backgroundcolor)) style="background:{{ $settings->backgroundcolor }} !important" @endif>
+
+
+                        <div class="footer-logo">
+                       
+                         @if (isset($settings) && !empty($settings->footerlogo))
+                          <img src="{{ asset('frontend/assets') }}/img/{{ $settings->footerlogo }}" alt="logo">
+                         @else
+                          <img src="{{ asset('frontend/assets') }}/img/footer-logo.png" alt="logo">
+                         @endif
+                         
+
                         </div>
-                        <div style="font-family: GothamBook; font-size: 12px; margin-top: 20px;">©2020 All rights reserved Tapply Vietnam</div>
+                        <div class="contact"><span  @if(isset($settings) && !empty($settings->backgroundcolor)) style="background:{{ $settings->backgroundcolor }} !important" @endif>
+                          @if (isset($settings) && !empty($settings->footrtext))
+                         {{ $settings->footrtext }}
+                        
+                         @endif
+
+                        </span></div>
+
+                           @if (isset($settings) && $settings->social_link_show=='on')
+                        <div class="social-wrap">
+                            <a href="{{$settings->fblink}}"><img class="icon" src="{{ asset('frontend/assets') }}/img/fb-contact.png" alt="facebook"></a>
+                            <a href="{{$settings->mslink}}"><img class="icon" src="{{ asset('frontend/assets') }}/img/message-contact.png" alt="facebook"></a>
+                        </div>
+                         @endif
+                        <div style="font-family: GothamBook; font-size: 12px; margin-top: 20px;">
+                           @if (isset($settings) && !empty($settings->copyright_text))
+                         {{ $settings->copyright_text }}
+                        
+                         @endif
+                        </div>
                     </footer>
                 </section>
             </div>

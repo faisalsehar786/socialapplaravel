@@ -19,6 +19,7 @@ class UservalidationControll
       $username=$request->route('username');
      $userObj=User::where('username',$username);
 
+     $userObj2=User::where('usernanme_by_user',$username);
      
      if ($userObj->count()>0) {
      
@@ -29,6 +30,8 @@ class UservalidationControll
      }
         
 
+      }elseif ($userObj2->count()>0 && $userObj2->first()->activation=='on') {
+           return redirect('/'.$userObj2->first()->username);
       } else {
            return redirect('/login'); 
       }

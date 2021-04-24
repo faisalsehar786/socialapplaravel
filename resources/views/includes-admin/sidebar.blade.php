@@ -19,12 +19,19 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
+       <li class="nav-item active">
+        <a href="{{ route('settings_dashboard') }}" class="nav-link" >
+          <i class="fas fa-cogs"></i>
+          <span>Settings</span></a>
+      </li>
 
        <li class="nav-item active">
         <a href="{{ route('user_mangement_homepanel') }}" class="nav-link" href="/admin">
           <i class="fas fa-fw fa-user-alt"></i>
           <span>Users Mangement</span></a>
       </li>
+
+
 
 
 

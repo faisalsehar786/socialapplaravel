@@ -15,15 +15,24 @@ class Settings extends Migration
     {
        Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->text('order',500)->nullable();
             $table->text('headerlogo',500)->nullable();
             $table->text('footerlogo',500)->nullable();
             $table->text('optional_logo',500)->nullable();
+            $table->text('backgroundcolor',500)->nullable();
+            $table->text('buttoncolor',500)->nullable();
+            $table->text('borderpanelcolor',500)->nullable();
+            $table->text('sectioncolor',500)->nullable();
+            $table->text('footrtext',500)->nullable();
+            $table->text('copyright_text',500)->nullable();
+            $table->enum('social_link_show', ['on','off'])->default('on');
+            $table->text('fblink',500)->nullable();
+            $table->text('mslink',500)->nullable();
             $table->text('login_page_meta',500)->nullable();
             $table->text('after_login_page_meta',500)->nullable();
             $table->text('mangelinks_page_meta',500)->nullable();
             $table->text('customize_page_meta',500)->nullable();
             $table->text('profile_page_meta',500)->nullable();
+            $table->text('activation_page_meta',500)->nullable();
             $table->rememberToken();
             $table->timestamps(); 
         });

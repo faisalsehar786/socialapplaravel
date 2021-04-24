@@ -103,7 +103,7 @@ class RegisterController extends Controller
       
       $updateUser=User::where('username',$request->usernamepre);
       $updateUser->update([
-        'username' =>$request->username,
+        'usernanme_by_user' =>$request->username,
         'email' =>$request->email,
         'password' => Hash::make($request->password),
         'activation' =>'on',

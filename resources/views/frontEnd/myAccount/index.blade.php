@@ -74,11 +74,11 @@
 
                                                     @if (!empty(Auth::user()->image))
                                                      <img src="{{ asset('assets/img') }}/{{ Auth::user()->image }}"
-                                                    id="showProfileImage"
+                                                    id="showProfileImage2"
                                                     >
                                                     @else
                                                      <img src="{{ asset('img') }}/user_img_not_found.png"
-                                                    id="showProfileImage"
+                                                    id="showProfileImage2"
                                                     >
                                                     @endif
 
@@ -296,6 +296,7 @@
     
     reader.onload = function(e) {
     $('#showProfileImage').attr('src', e.target.result);
+    $('#showProfileImage2').attr('src', e.target.result);
     }
     
     reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -303,7 +304,7 @@
     }
     $( ".upload-btn" ).click(function() {
     
-    
+     
     $("#cclikFile").trigger('click');
     $("#cclikFile").change(function(e) {
     readURL(this);

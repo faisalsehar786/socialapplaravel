@@ -63,8 +63,14 @@ Route::prefix('admin')->group(function ()
 
 
 
-     });
+///////////////////////// Settings //////////////////////////////////
 
+Route::get('settings_dashboard', 'SettingsController@index')->name('settings_dashboard');
+ Route::post('settings_update', 'SettingsController@settings_update')->name('settings_update');
+///////////////////////// Settings send //////////////////////////////////
+
+     });
+ 
 
     // Admin Login
     Route::get('/login', 'AdminUserController@index')

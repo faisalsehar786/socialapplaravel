@@ -3,7 +3,7 @@
 use App\AdminUser;
 use Illuminate\Database\Seeder;
 use App\Role;
-
+use App\Settings;
 class AdminUserSeeder extends Seeder
 {
     /**
@@ -38,6 +38,30 @@ class AdminUserSeeder extends Seeder
 
 
          DB::update("ALTER TABLE users AUTO_INCREMENT =2;");
+
+
+
+          Settings::create([
+        'headerlogo'=>'none',
+        'footerlogo'=>'none', 
+        'optional_logo'=>'none',
+        'backgroundcolor'=>'none',
+        'buttoncolor'=>'none',
+        'borderpanelcolor'=>'none',
+        'sectioncolor'=>'none',
+        'footrtext'=>'none',
+        'copyright_text'=>'none',
+        'fblink'=>'none',
+        'mslink'=>'none',
+        'login_page_meta'=>'none',
+        'after_login_page_meta'=>'none',
+        'mangelinks_page_meta'=>'none',
+        'customize_page_meta'=>'none',
+        'profile_page_meta'=>'none',
+        'activation_page_meta'=>'none'
+     
+
+     ]);
     }
 
      

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use App\User;
 class LoginController extends Controller
 {
     /*
@@ -42,8 +43,18 @@ class LoginController extends Controller
     public function findUsername()
     {
         $login = request()->input('username');
+
+       $userObj2=User::where('usernanme_by_user',$login);
+
+          if ($userObj2->count()>0) {
+              $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'usernanme_by_user';  
+          }else {
+              $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';   
+          }
  
-        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+      
+
+        // dd($fieldType);
  
         request()->merge([$fieldType => $login]);
  

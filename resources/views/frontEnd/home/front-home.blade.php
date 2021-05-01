@@ -1,6 +1,12 @@
 {{-- extend  --}}
 @extends('front-end-layout.login_register_layout')
-@section('title', 'login')
+@section('page_meta')
+@php
+  $metepage=App\Settings::first();
+@endphp
+{{  $metepage->login_page_meta }}
+@endsection
+@section('title', 'Login')
 @section('content')
 <main class="ant-layout-content app-login p-15">
     <h1 class="logo">

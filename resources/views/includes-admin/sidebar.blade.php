@@ -31,8 +31,14 @@
           <span>Users Mangement</span></a>
       </li>
 
+      <li class="nav-item active"> 
+        <a href="{{ route('social_links') }}" class="nav-link" href="/admin">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>Social Links Mockup</span></a>
+      </li>
 
 
+ 
 
 
       <!-- Sidebar Toggler (Sidebar) -->

@@ -1,36 +1,19 @@
-<html lang="en"><head>
-        <meta charset="utf-8">
-        <link rel="icon" href="/favicon.png">
-        <link rel="preload" href="/fonts/SVN-Gotham-Regular.otf" as="font" crossorigin="">
-        <link rel="preload" href="/fonts/SVN-Gotham-Light.otf" as="font" crossorigin="">
-        <link rel="preload" href="/fonts/SVN-Gotham-Thin.otf" as="font" crossorigin="">
-        <link rel="preload" href="/fonts/SVN-Gotham-Book.otf" as="font" crossorigin="">
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-        <meta name="theme-color" content="#000000">
-        <meta name="description" content="Web site created using create-react-app">
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-        <link rel="apple-touch-icon" href="/logo192.png">
-        <link rel="manifest" href="/manifest.json">
-        <title>Tapply</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link href="{{ asset('frontend/assets') }}/css/output.css" rel="stylesheet">
-        <link href="{{ asset('frontend/assets') }}/css/outputmain.css" rel="stylesheet">
-    </head>
-     @php
-
-         $settings=App\Settings::first(); 
-
-                         @endphp
-    <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root">
-            <div class="App">
-                <section class="ant-layout" >
-                    <div class="public-profile-wrap" @if(isset($settings) && !empty($settings->backgroundcolor)) style="background:{{ $settings->backgroundcolor }} !important" @endif>
+@extends('front-end-layout.login_register_layout')
+@section('page_meta')
+@php
+  $metepage=App\Settings::first(); 
+@endphp
+{{  $metepage->profile_page_meta }}
+@endsection
+@section('title', 'Profile')
+@section('content')
                         <main class="ant-layout-content profile-page ">
                             <h1 class="logo">
 
-                               
+                              @php 
+                          $settings=App\Settings::first(); 
+
+                         @endphp 
                          @if (isset($settings) && !empty($settings->headerlogo))
                           <img src="{{ asset('frontend/assets') }}/img/{{ $settings->headerlogo }}" class="mt-5" alt="Logo">
                          @else
@@ -173,46 +156,16 @@
                                     </div>
                                 </div>
                             </div>
-                             <footer class="ant-layout-footer"  @if(isset($settings) && !empty($settings->backgroundcolor)) style="background:{{ $settings->backgroundcolor }} !important" @endif>
-
-
-                        <div class="footer-logo">
-                       
-                         @if (isset($settings) && !empty($settings->footerlogo))
-                          <img src="{{ asset('frontend/assets') }}/img/{{ $settings->footerlogo }}" alt="logo">
-                         @else
-                          <img src="{{ asset('frontend/assets') }}/img/footer-logo.png" alt="logo">
-                         @endif
-                         
-
-                        </div>
-                        <div class="contact"><span  @if(isset($settings) && !empty($settings->backgroundcolor)) style="background:{{ $settings->backgroundcolor }} !important" @endif>
-                          @if (isset($settings) && !empty($settings->footrtext))
-                         {{ $settings->footrtext }}
-                        
-                         @endif
-
-                        </span></div>
-
-                           @if (isset($settings) && $settings->social_link_show=='on')
-                        <div class="social-wrap">
-                            <a href="{{$settings->fblink}}"><img class="icon" src="{{ asset('frontend/assets') }}/img/fb-contact.png" alt="facebook"></a>
-                            <a href="{{$settings->mslink}}"><img class="icon" src="{{ asset('frontend/assets') }}/img/message-contact.png" alt="facebook"></a>
-                        </div>
-                         @endif
-                        <div style="font-family: GothamBook; font-size: 12px; margin-top: 20px;">
-                           @if (isset($settings) && !empty($settings->copyright_text))
-                         {{ $settings->copyright_text }}
-                        
-                         @endif
-                        </div>
-                    </footer>
+                          
                         </main>
-                    </div>
-                </section>
-            </div>
-        </div>
+                 
      
     
 
-</body></html>
+@endsection
+@section("footer")
+@parent
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="{{ asset('frontend/assets') }}/css/output.css" rel="stylesheet">
+        <link href="{{ asset('frontend/assets') }}/css/outputmain.css" rel="stylesheet">
+@endsection

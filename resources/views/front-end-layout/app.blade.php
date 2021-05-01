@@ -1,12 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+         
+        @yield('page_meta')
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title')</title>
         {{-- include all css files and meta tags --}}
@@ -23,7 +19,13 @@
                 <div class="AppBar_grow__gkU4D">
                     <header class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary AppBar_appBar__2OUda mui-fixed MuiPaper-elevation4" style="">
                         <div class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters">
-                            <div class="AppBar_menuButton__3Nnxt"><h3 class="AppBar_logoText__1ZkOm">ONTHECARD</h3></div>
+                            <div class="AppBar_menuButton__3Nnxt"><h3 class="AppBar_logoText__1ZkOm">
+                              
+                              @php
+                               $settings= App\Settings::first();
+                              @endphp
+                              <img src="{{ asset('frontend/assets/img/') }}/{{$settings->headerlogo }}" alt="" class="img-fluid" style="max-width: 189px;height: auto;">
+                            </h3></div>
                             <div class="AppBar_grow__gkU4D"></div>
                             <div class="AppBar_sectionDesktop__2RfQ-">
                                 <p class="MuiTypography-root AppBar_accountIconArea__3_JNJ MuiTypography-body1 MuiTypography-noWrap">

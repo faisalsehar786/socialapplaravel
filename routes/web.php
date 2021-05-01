@@ -69,6 +69,28 @@ Route::get('settings_dashboard', 'SettingsController@index')->name('settings_das
  Route::post('settings_update', 'SettingsController@settings_update')->name('settings_update');
 ///////////////////////// Settings send //////////////////////////////////
 
+
+///////////////////////// Social Links //////////////////////////////////
+ 
+Route::get('social_links', 'LinksMockupsController@index')->name('social_links');
+
+Route::get('social_links_ajax', 'LinksMockupsController@social_links_ajax')->name('social_links_ajax');
+
+Route::post('social_links_add', 'LinksMockupsController@social_links_add')->name('social_links_add');
+
+Route::get('social_links_edit/{id}', 'LinksMockupsController@social_links_edit')->name('social_links_edit');
+
+Route::post('social_links_del', 'LinksMockupsController@social_links_del')->name('social_links_del');
+
+ Route::post('social_link_update', 'LinksMockupsController@social_link_update')->name('social_link_update');
+
+
+
+
+  
+
+  
+
      });
  
 
@@ -110,10 +132,18 @@ Route::group(['prefix' => 'mange'], function(){
 
    
 // myaccount Page Route
-
 Route::post('/updateUserData', 'Account\ProfileController@updateUserData')->name('updateUserData');
-  
+///////////////////////// user Links Save  //////////////////////////////////
 
+Route::post('links_ajax_user_save', 'LinksController@links_ajax_user_save')->name('links_ajax_user_save');
+
+Route::get('links_ajax_shareLink_get', 'LinksController@links_ajax_shareLink_get')->name('links_ajax_shareLink_get');
+
+Route::post('links_ajax_user_del', 'LinksController@links_ajax_user_del')->name('links_ajax_user_del');
+
+Route::post('links_ajax_user_order_save', 'LinksController@links_ajax_user_order_save')->name('links_ajax_user_order_save');
+
+Route::get('links_ajax_shareLink_get_order_display', 'LinksController@links_ajax_shareLink_get_order_display')->name('links_ajax_shareLink_get_order_display');
 // myaccount Page Route End
 
 }); 

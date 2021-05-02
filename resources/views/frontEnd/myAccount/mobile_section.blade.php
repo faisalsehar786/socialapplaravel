@@ -1,8 +1,10 @@
-     
+     @php
+      $linkorderCheck= App\Linkorder::where('user_id',Auth::user()->id);
+     @endphp
        <div class="EditProfile_profilePreviewArea__IAV__">
         <div class="DesktopPreview_SocialMediaList__JRKcC">
           <div class="DesktopPreview_desktopPreviewArea__36Oq2">
-            <div class="DesktopPreview_desktopPreviewOpacityBg__2MJCv"></div>
+           {{--  //<div class="DesktopPreview_desktopPreviewOpacityBg__2MJCv"></div> --}}
             <div class="DesktopPreview_previewPhoneArea__3AKzq" style="background: rgb(255, 255, 255);">
               <div style="position: fixed;
                 right: 20px;
@@ -12,8 +14,22 @@
                 <br>
                 <button type="" class="btn-outline-info btn-lg shadow-lg temptwoclick">Template 2</button>
               </div>
-              <div id="desktop-preview" class="DesktopPreview_desktopPreview__2fT6p">
-                <div class="temptwo" style="display:none;">
+              <div id="desktop-preview" class="DesktopPreview_desktopPreview__2fT6p" style="padding-right:0px !important">
+               
+                <section class="ant-layout " >
+                  <div class="public-profile-wrap pt-5" style='background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover;
+@if (!empty($linkorderCheck->first()->bgimg))
+background-image: url("{{ asset('frontend/assets/img/') }}/{{ $Lorder->first()->bgimg }}");
+@else
+background-color:{{ $linkorderCheck->first()->bgcolor }};
+@endif
+  '>
+                    <main class="ant-layout-content profile-page">
+
+
+                       <div class="temptwo" style="display:@if( $linkorderCheck->count()>0 && $linkorderCheck->first()->temp==2) block  @else none @endif;">
                   <div class="image" style="width: 170px;
                     height: 170px;
                     border-radius: 90px;
@@ -28,7 +44,7 @@
                     background-repeat: no-repeat;
                     padding: 5px 0 10px;">
                     <h3><strong class="nameupdateC">{{ Auth::user()->name }}</strong></h3>
-                    <p  class="mb-0 aboutupdateC">{{ Auth::user()->about }}</p>
+                    <p  class="mb-0 aboutupdateC" style="word-break: break-all;">{{ Auth::user()->about }}</p>
                   </div>
                   <div  style="height: 5px;
                     border-bottom: 1px solid #000;">
@@ -41,7 +57,7 @@
                     <h5  class="mb-0">Compny Name</h5>
                   </div> --}}
                   <div>
-                    <a href="" class="mt-3" style="font-size: 14px;
+                    <a href="" class="mt-3 mb-3" style="font-size: 14px;
                       color: #000;
                       text-decoration: none;
                       display: inline-block;
@@ -57,11 +73,7 @@
                     margin-top: -5px;">SAVE CONTACT</a>
                   </div>
                 </div>
-                <section class="ant-layout " >
-                  <div class="public-profile-wrap pt-5">
-                    <main class="ant-layout-content profile-page">
-                      
-                      <div class="site-card-border-less-wrapper tempOne" style="margin: 0 auto 32px;">
+                      <div class="site-card-border-less-wrapper tempOne" style="margin: 0 auto 32px; display:@if( $linkorderCheck->count()>0 && $linkorderCheck->first()->temp==1) block @else none @endif;">
                         <div class="avatar-wrap">
                           <span class="ant-avatar ant-avatar-circle ant-avatar-image avatar" style="width: 150px; height: 150px; line-height: 150px; font-size: 18px;">
                             <img class='profilecimg' src="{{ asset('assets/img/') }}/{{ Auth::user()->image }}">

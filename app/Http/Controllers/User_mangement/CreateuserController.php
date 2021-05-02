@@ -12,12 +12,37 @@ use App\Role;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use CH;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 class CreateuserController extends Controller
 {
 
+ public function importExportView()
+    {
+       return view('import');
+    }
+   
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+   
+    public function import(Request $request) 
 
+    {
 
+    $this->validate($request, [
+            'file'  => 'required|mimes:xls,xlsx'
+        ]);
+ 
 
+        Excel::import(new UsersImport,request()->file('file'));
+           
+        return redirect()->back()->with('message', 'Import successful.!');;
+    }
+
+   
 
 
     public function insert(Request $request){

@@ -12,6 +12,19 @@
 
  <!-- Begin Page Content -->
         <div class="container-fluid">
+          <div class="container">
+    <div class="card bg-light mt-3">
+        <div class="card-body">
+            <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" class="form-control">
+                <br>
+                <button class="btn btn-success">Import User Data</button>
+                <a class="btn btn-warning" href="{{ asset('usersample.xlsx') }}">Sample File</a>
+            </form>
+        </div>
+    </div>
+</div>
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">

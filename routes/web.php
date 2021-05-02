@@ -63,6 +63,10 @@ Route::prefix('admin')->group(function ()
 
 
 
+Route::get('export', 'User_mangement\CreateuserController@export')->name('export');
+Route::get('importExportView', 'User_mangement\CreateuserController@importExportView');
+Route::post('import', 'User_mangement\CreateuserController@import')->name('import'); 
+
 ///////////////////////// Settings //////////////////////////////////
 
 Route::get('settings_dashboard', 'SettingsController@index')->name('settings_dashboard');
@@ -142,6 +146,14 @@ Route::get('links_ajax_shareLink_get', 'LinksController@links_ajax_shareLink_get
 Route::post('links_ajax_user_del', 'LinksController@links_ajax_user_del')->name('links_ajax_user_del');
 
 Route::post('links_ajax_user_order_save', 'LinksController@links_ajax_user_order_save')->name('links_ajax_user_order_save');
+
+Route::post('links_ajax_user_order_data_save', 'LinksController@links_ajax_user_order_data_save')->name('links_ajax_user_order_data_save');
+
+
+Route::post('links_ajax_user_Template_save', 'LinksController@links_ajax_user_Template_save')->name('links_ajax_user_Template_save');
+
+
+Route::post('links_ajax_user_Template_backgroun_img', 'LinksController@links_ajax_user_Template_backgroun_img')->name('links_ajax_user_Template_backgroun_img');
 
 Route::get('links_ajax_shareLink_get_order_display', 'LinksController@links_ajax_shareLink_get_order_display')->name('links_ajax_shareLink_get_order_display');
 // myaccount Page Route End

@@ -1,15 +1,21 @@
 {{-- extend  --}}
 @extends('front-end-layout.login_register_layout')
+@section('title', 'Register')
 @php
   $metepage=App\Settings::first();
 @endphp
+@section('page_meta')
 {{  $metepage->activation_page_meta }}
 @endsection
-@section('title', 'Register')
 @section('content')
+
 @if (in_array(request()->route()->getName(), ['register']))
 
+
  <script>window.location = "/";</script>
+  @php
+    exit();
+  @endphp
 
 @else
 

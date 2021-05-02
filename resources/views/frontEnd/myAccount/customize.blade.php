@@ -5,6 +5,7 @@
 @section('page_meta')
 @php
   $metepage=App\Settings::first();
+  $Lorder=App\Linkorder::where('user_id',Auth::user()->id);
 @endphp
 {{  $metepage->customize_page_meta }}
 @endsection
@@ -17,49 +18,16 @@
 <div class="EditProfile_editProfileContainer__p9NJA">
 <div class="EditProfile_profileEditContainer__3pCvA">
 <div class="CopyLink_copyLinkContainer__39pfe">
-<h3 class="CopyLink_copyLinkTitle__3Yykr">Your Link:</h3>
-<h3 class="CopyLink_accountUrl__2ZKBH">https://onthecard.me/mrchloe</h3>
-<div class="CopyLink_buttonContainer__2woX2">
-<div class="CopyLink_copyLinkButton__HAu09">
-<img
-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD9SURBVHgBrZIxEoIwFET3RwpKKO2wo/UEcgM9Qm7kEYw30BvgCbSkpLNxxnQ6OviNiqJOAuKwDTBLNpv3Q3AokvvARzFBo3pppsKcbFYs95EArxkcoFn6ADHw7F6RMChgQIFE6ozgS2KaSJ+KsYc6EafZLJy77FjuTA7J27tAR7o3+gYrQCNGO3kVWHqBbRtSNrKALSGihSrYb2DfIf6qbmE7d2FKHu1cLaqhWIN89BYnXKbmJ0k1R7yFmF0083llDdqoUMdyOwT5o2rVYwDft/3AepmrgXYeLVP93Dzy5/drAI7b3j3sNmCtQf+Atfn3BgZs9AHWoWMJ1uZdAYLmcIwEdyPUAAAAAElFTkSuQmCC"
-alt=""
-class="CopyLink_IconCopy__3_2V1"
-/>
-Copy Link
-</div>
-<a href="/{{ Auth::user()->username }}" class="MuiButtonBase-root MuiButton-root MuiButton-contained CopyLink_seePageButton__nj4r6 MuiButton-containedPrimary" tabindex="0" type="button">
-<span class="MuiButton-label"><i class="far fa-eye" aria-hidden="true"></i> View Page</span><span class="MuiTouchRipple-root"></span>
-</a>
-</div>
-</div>
+
+ @include('frontEnd.myAccount.copyinvitation')
+
 <div class="EditProfile_profileEditArea__39Jlt">
 <div class="EditProfile_profileTab__3fYn3">
 <div class="MuiPaper-root EditProfile_tabPaper__3ePpd MuiPaper-elevation1">
 <div class="MuiTabs-root">
 <div class="MuiTabs-scroller MuiTabs-fixed" style="overflow: hidden;">
 <div class="MuiTabs-flexContainer" role="tablist">
-<button class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary EditProfile_tabText__31zS7 MuiTab-fullWidth" tabindex="-1" type="button" role="tab" aria-selected="false">
-<span class="MuiTab-wrapper">Basic Info</span><span class="MuiTouchRipple-root"></span>
-</button>
-<button
-class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary EditProfile_tabText__31zS7 EditProfile_middleTab__XaQ8N MuiTab-fullWidth"
-tabindex="-1"
-type="button"
-role="tab"
-aria-selected="false"
->
-<span class="MuiTab-wrapper">Manage Link</span><span class="MuiTouchRipple-root"></span>
-</button>
-<button
-class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary EditProfile_tabText__31zS7 Mui-selected MuiTab-fullWidth"
-tabindex="0"
-type="button"
-role="tab"
-aria-selected="true"
->
-<span class="MuiTab-wrapper">Customize</span><span class="MuiTouchRipple-root"></span>
-</button>
+@include('frontEnd.myAccount.buttontab')
 </div>
 <span class="jss1 jss2 MuiTabs-indicator" style="left: 512.675px; width: 255.338px;"></span>
 </div>
@@ -75,112 +43,112 @@ aria-selected="true"
 
 <div class="CustomizeBackground_optionBox__yDdS0" >
 <ul class="MuiGridList-root" style="margin: -2px;">
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='#E5E5EF' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
-<div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(74, 174, 232);">
+<div class="CustomizeBackground_colorCircleArea__mfh27" >
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(229, 229, 239);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root"  selectColor='#282828' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(40, 40, 40);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='#FF646A' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(255, 100, 106);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='#FB7A1D' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(251, 122, 29);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='#FFB577' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(255, 181, 119);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(212, 255, 0)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(212, 255, 0);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(1, 254, 56)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(1, 254, 56);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(130, 253, 137)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(130, 253, 137);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(0, 255, 212)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(0, 255, 212);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(255, 148, 167)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(255, 148, 167);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(255, 103, 133)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(255, 103, 133);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root"  selectColor='rgb(255, 0, 195)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(255, 0, 195);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(0, 164, 207)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(0, 164, 207);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(188, 7, 250)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(188, 7, 250);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(111, 7, 248)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(111, 7, 248);"></div>
 </div>
 </div>
 </li>
-<li class="MuiGridListTile-root" style="width: 12.5%; height: 54px; padding: 2px;">
+<li class="MuiGridListTile-root" selectColor='rgb(0, 30, 255)' style="width: 12.5%; height: 54px; padding: 2px;">
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorCircleArea__mfh27" style="border: 3px solid rgb(255, 255, 255);">
 <div class="CustomizeBackground_colorCircle__3NJtl" style="background-color: rgb(0, 30, 255);"></div>
@@ -203,7 +171,12 @@ aria-selected="true"
 <div class="CustomizeBackground_mobileViewBackground__1enJS" style="">
 <img
 alt="upload preview"
-src="https://firebasestorage.googleapis.com/v0/b/onthecard2021.appspot.com/o/images%2Fnmnntlc%40gmail.com%2FScreenshot%20(1).png?alt=media&amp;token=8dc32171-3521-4da1-815d-2b60257acd3e"
+@if (!empty($Lorder->first()->bgimg))
+src="{{ asset('frontend/assets/img/') }}/{{ $Lorder->first()->bgimg }}"
+@else
+src="{{ asset('/img/') }}/user_img_not_found.png"
+@endif
+
 class="CustomizeBackground_ImageResponsive__2wJeB"
 />
 </div>
@@ -220,7 +193,22 @@ alt=""
 />
 Replace Image
 </label>
-<input type="file" id="file-ip-1" accept="image/*" class="CustomizeBackground_uploadedImageInput__2zsPN" />
+ <form method="POST" id="upload_form" enctype="multipart/form-data" action="{{ route('links_ajax_user_Template_backgroun_img') }}">
+ 	@csrf
+<input type="file" id="file-ip-1" accept="image/*" class="CustomizeBackground_uploadedImageInput__2zsPN" name="backgroundImage" />
+@php
+	
+	
+if ($Lorder->count()>0){
+$imh=$Lorder->first()->bgimg;
+}else {
+	$imh='';
+}
+		
+@endphp
+
+<input type="hidden" name="headerlogoimagehidden" value="{{ $imh }}">
+
 </div>
 <div class="CustomizeBackground_mobileViewButtonArea__aqXPm">
 <label class="CustomizeBackground_btnReplaceImage__2RY_S">
@@ -236,20 +224,7 @@ alt=""
 </div>
 </div>
 <div class="Backdrop BackdropClosed"></div>
-<div class="ModalLoading_Modal__2QIsX ModalLoading_ModalClosed__2RLMu">
-<p class="ModalLoading_closeButton__3isx9">x</p>
-<div class="sk-folding-cube">
-<div class="sk-cube1 sk-cube"></div>
-<div class="sk-cube2 sk-cube"></div>
-<div class="sk-cube4 sk-cube"></div>
-<div class="sk-cube3 sk-cube"></div>
-</div>
-<h3 class="ModalLoading_waitingText__NdgcC">Loading...</h3>
-<p class="ModalLoading_normalText__3_LnE">
-<span class="ModalLoading_spanText__ADBCW">Notice</span>: Remember to hit <span class="ModalLoading_spanText__ADBCW">Save Info</span> button down below after you upload this
-image
-</p>
-</div>
+
 </div>
 </div>
 <div class="css-gwb9cz">
@@ -262,9 +237,9 @@ image
 <ul class="MuiGridList-root" style="margin: -2px;">
 <li class="MuiGridListTile-root" style="width: 33.3333%; height: 94px; padding: 2px;">
 <div class="MuiGridListTile-tile">
-<div class="CustomizeBackground_colorStyleOutline__2ySaB" style="border: 3px solid rgb(41, 96, 237);">
+<div class="CustomizeBackground_colorStyleOutline__2ySaB" >
 <div class="CustomizeBackground_colorStyleInline__3OLpk" style="border: rgb(255, 255, 255);">
-<div class="CustomizeBackground_styleTriangle__1Hku4" style="background-color: rgb(255, 255, 255);"></div>
+<div class="CustomizeBackground_styleTriangle__1Hku4" setbackcolor='rgb(255, 255, 255)' style="background-color: rgb(255, 255, 255);"></div>
 </div>
 </div>
 <p class="CustomizeBackground_styleText__3aRph">Light</p>
@@ -274,7 +249,7 @@ image
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorStyleOutline__2ySaB" style="">
 <div class="CustomizeBackground_colorStyleInline__3OLpk" style="border: rgb(255, 255, 255);">
-<div class="CustomizeBackground_styleTriangle__1Hku4" style="background-color: rgb(229, 229, 239);"></div>
+<div class="CustomizeBackground_styleTriangle__1Hku4" setbackcolor='rgb(229, 229, 239)' style="background-color: rgb(229, 229, 239);"></div>
 </div>
 </div>
 <p class="CustomizeBackground_styleText__3aRph">Color</p>
@@ -284,7 +259,7 @@ image
 <div class="MuiGridListTile-tile">
 <div class="CustomizeBackground_colorStyleOutline__2ySaB">
 <div class="CustomizeBackground_colorStyleInline__3OLpk" style="border: rgb(255, 255, 255);">
-<div class="CustomizeBackground_styleTriangle__1Hku4" style="background-color: rgb(204, 204, 204);"></div>
+<div class="CustomizeBackground_styleTriangle__1Hku4" style="background-color: rgb(204, 204, 204);" setbackcolor='rgb(204, 204, 204)'></div>
 </div>
 </div>
 <p class="CustomizeBackground_styleText__3aRph">Dark</p>
@@ -345,9 +320,9 @@ background-size: contain;
 </div>
 </div>
 </div>
-<div class="CustomizeBackground_saveButtonArea__3Q-rf"><button type="button" class="MainButton_button__1JA3M">Update Changes</button></div>
+<div class="CustomizeBackground_saveButtonArea__3Q-rf"><button type="submit" class="MainButton_button__1JA3M">Update Background Image</button></div>
 </div>
-
+</form>
 <div class="Backdrop BackdropClosed"></div>
 </div>
 </div>
@@ -420,7 +395,108 @@ $('.public-profile-wrap').removeClass('pt-5');
 });
 
 
+
+$('.MuiGridListTile-root').click(function(){
+
+let TabBgColor=$(this).attr('selectcolor');
+
+$('.public-profile-wrap').css('background-color',TabBgColor);
+$('#desktop-preview').css('background-color',TabBgColor);
+$.ajax({
+url:"{{ route('links_ajax_user_Template_save') }}",
+type:"POST",
+dataType:"json",
+data:{bccolor:TabBgColor,_token:"{{ csrf_token() }}"},
+success:function(res)
+{
+if(res.status=='ok'){
+ 
+toastr.success('Template Background Set Successfully...!')
+}
+}
+}) 
+
+
+})
+
+
+ //////////////////////////////////////////////////////
+
+$('.CustomizeBackground_styleTriangle__1Hku4').click(function(){
+
+let TabBgColor=$(this).attr('setbackcolor');
+
+$('.public-profile-wrap').css('background-color',TabBgColor);
+$('#desktop-preview').css('background-color',TabBgColor);
+
+$.ajax({
+url:"{{ route('links_ajax_user_Template_save') }}",
+type:"POST",
+dataType:"json",
+data:{bccolor:TabBgColor,_token:"{{ csrf_token() }}"},
+success:function(res)
+{
+if(res.status=='ok'){
+ 
+toastr.success('Template Background Set Successfully...!')
+}
+}
+}) 
+})
+
+ 
+$('.CustomizeBackground_btnReplaceImage__2RY_S').click(function(){
+
+
+$('.public-profile-wrap').css('background-image', 'none');
+$('.CustomizeBackground_ImageResponsive__2wJeB').attr('src','{{ asset('/img/user_img_not_found.png') }}');
+
+$.ajax({
+url:"{{ route('links_ajax_user_Template_save') }}",
+type:"POST",
+dataType:"json",
+data:{removeimg:'ok',_token:"{{ csrf_token() }}"},
+success:function(res)
+{ 
+if(res.status=='ok'){
+ 
+toastr.success('Template Background Image Removed...!')
+}
+}
+})
+
+})
+
+
+
+///////////////////////////////////////////////////////////////
+
+function readURL(input) {
+if (input.files && input.files[0]) {
+var reader = new FileReader();
+
+reader.onload = function(e) {
+$('.CustomizeBackground_ImageResponsive__2wJeB').attr('src', e.target.result);
+$('.public-profile-wrap').css('background-image', 'url(' + e.target.result + ')')
+
+}
+
+reader.readAsDataURL(input.files[0]); // convert to base64 string
+}
+}
+$(".CustomizeBackground_btnAddImage__16qi7" ).click(function() {
+
+
+// $("#file-ip-1").trigger('click');
+$("#file-ip-1").change(function(e) {
+readURL(this);
 });
+});
+
+});
+
+
+
 </script>
 <style type="text/css">
 

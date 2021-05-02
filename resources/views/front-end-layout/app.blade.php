@@ -81,5 +81,54 @@
   });
 });
         </script>
+        <script type="text/javascript">
+  function myInputcopyLik() {
+  var copyText = document.getElementById("myInputcopyLik");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  toastr.success('Profile Link Copy Successfully...!');
+
+}
+
+
+$(document).ready(function(){
+
+$('.tempOneclick').click(function(){
+$.ajax({
+url:"{{ route('links_ajax_user_Template_save') }}",
+type:"POST",
+dataType:"json",
+data:{temp:1,_token:"{{ csrf_token() }}"},
+success:function(res)
+{
+if(res.status=='ok'){
+ 
+toastr.success('Template one Set Successfully...!')
+}
+}
+}) 
+})
+//////////////////////////////
+
+$('.temptwoclick').click(function(){
+$.ajax({
+url:"{{ route('links_ajax_user_Template_save') }}",
+type:"POST",
+dataType:"json",
+data:{temp:2,_token:"{{ csrf_token() }}"},
+success:function(res)
+{
+if(res.status=='ok'){
+ 
+toastr.success('Template one Set Successfully...!')
+}
+}
+}) 
+})
+///////////////////////////////////
+
+  });
+</script>
     </body>
 </html>

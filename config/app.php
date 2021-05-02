@@ -177,7 +177,7 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         // ConsoleTVs\Charts\ChartsServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         // PragmaRX\Countries\ServiceProvider::class,
 
         App\Providers\RouteServiceProvider::class,
@@ -238,7 +238,7 @@ return [
          'CustomHelper' => App\Providers\CustomServiceProvider::class,
 
          // 'Countries'=> PragmaRX\Countries\Facade::class,
-       
+       'Excel' => Maatwebsite\Excel\Facades\Excel::class,
           'CH' => App\helpers\facade\CustomHelper::class,
 
     ],

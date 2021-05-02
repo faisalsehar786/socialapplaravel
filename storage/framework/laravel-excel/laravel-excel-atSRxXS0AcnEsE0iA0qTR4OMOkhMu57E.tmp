@@ -1,0 +1,494 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 01, 2021 at 11:07 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `socialapp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_users`
+--
+
+CREATE TABLE `admin_users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role_id` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admin_users`
+--
+
+INSERT INTO `admin_users` (`id`, `name`, `email`, `password`, `remember_token`, `parent_id`, `type`, `role_id`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@gmail.com', '$2y$10$QiNssq1QuLrIMBCjZjSlYOejlsEpjBJer8TzTCjB/XzeONSgljzXe', NULL, 0, NULL, 0, '2021-04-24 14:46:27', '2021-04-24 14:46:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `general`
+--
+
+CREATE TABLE `general` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `address` longtext COLLATE utf8mb4_unicode_ci,
+  `address2` longtext COLLATE utf8mb4_unicode_ci,
+  `phone` longtext COLLATE utf8mb4_unicode_ci,
+  `howtoBid` longtext COLLATE utf8mb4_unicode_ci,
+  `howtoBidimg` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `links`
+--
+
+CREATE TABLE `links` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `link_mock_id` int(10) DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` text COLLATE utf8mb4_unicode_ci,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `links`
+--
+
+INSERT INTO `links` (`id`, `user_id`, `link_mock_id`, `name`, `image`, `url`, `remember_token`, `created_at`, `updated_at`) VALUES
+(45, 2, 3, NULL, NULL, NULL, NULL, '2021-05-01 16:01:19', '2021-05-01 16:01:19'),
+(47, 2, 4, NULL, NULL, NULL, NULL, '2021-05-01 16:01:32', '2021-05-01 16:01:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `linksmockups`
+--
+
+CREATE TABLE `linksmockups` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci,
+  `slug` text COLLATE utf8mb4_unicode_ci,
+  `placeholder` text COLLATE utf8mb4_unicode_ci,
+  `icon` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url_type` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comp_url` text COLLATE utf8mb4_unicode_ci,
+  `base_url` text COLLATE utf8mb4_unicode_ci,
+  `sub_part_url` text COLLATE utf8mb4_unicode_ci,
+  `del` enum('yes','no') COLLATE utf8mb4_unicode_ci DEFAULT 'no',
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `linksmockups`
+--
+
+INSERT INTO `linksmockups` (`id`, `name`, `slug`, `placeholder`, `icon`, `url_type`, `comp_url`, `base_url`, `sub_part_url`, `del`, `remember_token`, `created_at`, `updated_at`) VALUES
+(3, 'facebook', 'facebook', 'facebook', '1619700997608aad0552926.png', 'simple', 'https://www.facebook.com', NULL, NULL, 'no', NULL, '2021-04-29 06:38:33', '2021-05-01 08:20:32'),
+(4, 'zalo', 'zalo', '0855031018', '1619701108608aad74daec3.png', 'custom', NULL, 'https://zalo.me', '0855031018', 'no', NULL, '2021-04-29 07:58:28', '2021-04-29 07:58:28'),
+(5, 'snapchat', 'snapchat', 'https://www.snapchat.com/add/abcxyz', '1619701184608aadc06ae8e.png', 'simple', 'https://www.snapchat.com/add/abcxyz', NULL, NULL, 'no', NULL, '2021-04-29 07:59:44', '2021-04-29 07:59:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `linksorder`
+--
+
+CREATE TABLE `linksorder` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `order` text COLLATE utf8mb4_unicode_ci,
+  `bgimg` text COLLATE utf8mb4_unicode_ci,
+  `bgcolor` text COLLATE utf8mb4_unicode_ci,
+  `temp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `linksorder`
+--
+
+INSERT INTO `linksorder` (`id`, `user_id`, `order`, `bgimg`, `bgcolor`, `temp`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 2, '3,4', NULL, NULL, NULL, NULL, NULL, '2021-05-01 16:01:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2018_04_16_194401_create_admin_users_table', 1),
+(4, '2019_08_19_000000_create_failed_jobs_table', 1),
+(5, '2019_10_15_062627_roles', 1),
+(6, '2019_10_15_062707_roles_authorities', 1),
+(7, '2019_10_15_062734_roles_subauthorities', 1),
+(8, '2020_12_03_072916_general', 1),
+(9, '2021_04_21_100155_links', 1),
+(10, '2021_04_21_100310_linkmockups', 1),
+(11, '2021_04_21_100342_customize', 1),
+(12, '2021_04_21_100405_settings', 1),
+(13, '2021_04_21_105850_linksorder', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Seller', 1, 1, '2021-04-24 14:46:27', '2021-04-24 14:46:27'),
+(2, 'Buyer', 1, 1, '2021-04-24 14:46:27', '2021-04-24 14:46:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rolesauthorities`
+--
+
+CREATE TABLE `rolesauthorities` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `authority` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `selected_ids` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rolesubauthorities`
+--
+
+CREATE TABLE `rolesubauthorities` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `role_authority_id` int(11) NOT NULL,
+  `authority` tinyint(1) NOT NULL DEFAULT '0',
+  `link` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `headerlogo` text COLLATE utf8mb4_unicode_ci,
+  `footerlogo` text COLLATE utf8mb4_unicode_ci,
+  `optional_logo` text COLLATE utf8mb4_unicode_ci,
+  `backgroundcolor` text COLLATE utf8mb4_unicode_ci,
+  `buttoncolor` text COLLATE utf8mb4_unicode_ci,
+  `borderpanelcolor` text COLLATE utf8mb4_unicode_ci,
+  `sectioncolor` text COLLATE utf8mb4_unicode_ci,
+  `footrtext` text COLLATE utf8mb4_unicode_ci,
+  `copyright_text` text COLLATE utf8mb4_unicode_ci,
+  `social_link_show` enum('on','off') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'on',
+  `fblink` text COLLATE utf8mb4_unicode_ci,
+  `mslink` text COLLATE utf8mb4_unicode_ci,
+  `login_page_meta` text COLLATE utf8mb4_unicode_ci,
+  `after_login_page_meta` text COLLATE utf8mb4_unicode_ci,
+  `mangelinks_page_meta` text COLLATE utf8mb4_unicode_ci,
+  `customize_page_meta` text COLLATE utf8mb4_unicode_ci,
+  `profile_page_meta` text COLLATE utf8mb4_unicode_ci,
+  `activation_page_meta` text COLLATE utf8mb4_unicode_ci,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `headerlogo`, `footerlogo`, `optional_logo`, `backgroundcolor`, `buttoncolor`, `borderpanelcolor`, `sectioncolor`, `footrtext`, `copyright_text`, `social_link_show`, `fblink`, `mslink`, `login_page_meta`, `after_login_page_meta`, `mangelinks_page_meta`, `customize_page_meta`, `profile_page_meta`, `activation_page_meta`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, '1619293904608476d03d122.png', '16192979046084867019ed1.png', '1619293904608476d03d69f.png', NULL, NULL, NULL, NULL, 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.', '©2020 All rights reserved Tapply Vietnam', 'off', 'facebook.com', 'facebook.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-24 15:58:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `usernanme_by_user` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `about` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `activation` enum('on','off') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'off',
+  `role_id` int(11) NOT NULL DEFAULT '0',
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `parent_id`, `username`, `usernanme_by_user`, `image`, `about`, `phone`, `activation`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'faisa', 'faisalsehar786@gmail.com', NULL, '$2y$10$sHC1B4./AfRzwsjpKDu1oeBVS26hVFaucNXeTeut15lWWwG.hW00u', 0, 'faisal', 'faisal786', '1619868805608d3c8549efc.jpg', 'abc', '03478600056', 'on', 1, 'iwmTqbEwGqHoT5kGUSikq2tieeUzE5qpW0SfxiM98SKGRHLKdnjgT3aNI18c', '2021-04-24 14:52:21', '2021-05-01 06:41:47'),
+(3, 'aqsa', NULL, NULL, NULL, 0, 'aqsa', NULL, 'user_img_not_found.png', NULL, NULL, 'off', 1, NULL, '2021-04-24 15:39:32', '2021-04-24 15:39:32');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin_users`
+--
+ALTER TABLE `admin_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admin_users_email_unique` (`email`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `general`
+--
+ALTER TABLE `general`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `links`
+--
+ALTER TABLE `links`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `linksmockups`
+--
+ALTER TABLE `linksmockups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `linksorder`
+--
+ALTER TABLE `linksorder`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rolesauthorities`
+--
+ALTER TABLE `rolesauthorities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rolesubauthorities`
+--
+ALTER TABLE `rolesubauthorities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin_users`
+--
+ALTER TABLE `admin_users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `general`
+--
+ALTER TABLE `general`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `links`
+--
+ALTER TABLE `links`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `linksmockups`
+--
+ALTER TABLE `linksmockups`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `linksorder`
+--
+ALTER TABLE `linksorder`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `rolesauthorities`
+--
+ALTER TABLE `rolesauthorities`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rolesubauthorities`
+--
+ALTER TABLE `rolesubauthorities`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

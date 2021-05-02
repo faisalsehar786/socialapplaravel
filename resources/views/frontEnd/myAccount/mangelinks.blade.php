@@ -15,22 +15,15 @@
     <div class="EditProfile_editProfileContainer__p9NJA">
       <div class="EditProfile_profileEditContainer__3pCvA">
         <div class="CopyLink_copyLinkContainer__39pfe">
-          <h3 class="CopyLink_copyLinkTitle__3Yykr">Your Link:</h3>
-          <h3 class="CopyLink_accountUrl__2ZKBH">https://onthecard.me/mrchloe</h3>
-          <div class="CopyLink_buttonContainer__2woX2">
-            <div class="CopyLink_copyLinkButton__HAu09"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD9SURBVHgBrZIxEoIwFET3RwpKKO2wo/UEcgM9Qm7kEYw30BvgCbSkpLNxxnQ6OviNiqJOAuKwDTBLNpv3Q3AokvvARzFBo3pppsKcbFYs95EArxkcoFn6ADHw7F6RMChgQIFE6ozgS2KaSJ+KsYc6EafZLJy77FjuTA7J27tAR7o3+gYrQCNGO3kVWHqBbRtSNrKALSGihSrYb2DfIf6qbmE7d2FKHu1cLaqhWIN89BYnXKbmJ0k1R7yFmF0083llDdqoUMdyOwT5o2rVYwDft/3AepmrgXYeLVP93Dzy5/drAI7b3j3sNmCtQf+Atfn3BgZs9AHWoWMJ1uZdAYLmcIwEdyPUAAAAAElFTkSuQmCC" alt="" class="CopyLink_IconCopy__3_2V1" /> Copy Link </div>
-            <button class="MuiButtonBase-root MuiButton-root MuiButton-contained CopyLink_seePageButton__nj4r6 MuiButton-containedPrimary" tabindex="0" type="button"> <span class="MuiButton-label"><i class="far fa-eye" aria-hidden="true"></i> View Page</span><span class="MuiTouchRipple-root"></span> </button>
-          </div>
-        </div>
+          @include('frontEnd.myAccount.copyinvitation')
+        
         <div class="EditProfile_profileEditArea__39Jlt">
           <div class="EditProfile_profileTab__3fYn3">
             <div class="MuiPaper-root EditProfile_tabPaper__3ePpd MuiPaper-elevation1">
               <div class="MuiTabs-root">
                 <div class="MuiTabs-scroller MuiTabs-fixed" style="overflow: hidden;">
                   <div class="MuiTabs-flexContainer" role="tablist">
-                    <button class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary EditProfile_tabText__31zS7 Mui-selected MuiTab-fullWidth" tabindex="0" type="button" role="tab" aria-selected="true"> <span class="MuiTab-wrapper">Basic Info</span><span class="MuiTouchRipple-root"></span> </button>
-                    <button class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary EditProfile_tabText__31zS7 EditProfile_middleTab__XaQ8N MuiTab-fullWidth" tabindex="-1" type="button" role="tab" aria-selected="false"> <span class="MuiTab-wrapper"><a href="{{ route('mangelinks') }}">Manage Link</a></span><span class="MuiTouchRipple-root"></span> </button>
-                    <button class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary EditProfile_tabText__31zS7 MuiTab-fullWidth" tabindex="-1" type="button" role="tab" aria-selected="false"> <span class="MuiTab-wrapper"><a href="{{ route('customize_settings') }}">Customize</a></span><span class="MuiTouchRipple-root"></span> </button>
+                  @include('frontEnd.myAccount.buttontab')
                     </div> <span class="jss9 jss10 MuiTabs-indicator" style="left: 0px; width: 255.338px;"></span> </div>
                   </div>
                 </div>
@@ -44,9 +37,17 @@
                       <div id="dynamic_form_nest_item" autocomplete="off" class="ant-form ant-form-horizontal ant-form-large form-link-editor">
                         <div>
                           <div>
+                            <form method="POST" id="mangelinksDataSave">
+                              @csrf
                             <div class="addli">
+
+                            
+                                
+
+                             
                               
                             </div>
+                             </form>
                             <button type="button" class="ant-btn ant-btn-dashed ant-btn-lg ant-btn-block mb-5 add"  data-z="340896456"  data-dir='add' data-toggle="modal" data-target="#myModal">
                             <span role="img" aria-label="plus" class="anticon anticon-plus">
                               <svg viewBox="64 64 896 896" focusable="false" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true">
@@ -57,7 +58,7 @@
                         </span>
                         <span>Add Link</span>
                         </button>
-                        <button type="button" class="MainButton_button__1JA3M">Update Changes</button>
+                        <button type="button" class="MainButton_button__1JA3M updatesavelinkdata">Update Changes</button>
                       </div>
                     </div>
                   </div>
@@ -83,7 +84,7 @@
                       @endphp
                       <option value="">Select Type</option>
                       @foreach ($all_links as $element)
-                      <option value="{{ $element->id }}">{{ $element->name }}</option>
+                      <option value="{{ $element->id }}" slug-fil='{{ $element->slug }}'>{{ $element->name }}</option>
                       @endforeach
                       
                     </select>
@@ -244,11 +245,24 @@ success:function(res)
 {
 addli(res);
  if(res.length>0){
+function providerLink(ojblink){
+if(ojblink.url==null){
+return '#';
+}else{
 
+ if(ojblink.linksmockup.url_type=='simple'){
+  return ojblink.url
+ }else{
+ 
+   return ojblink.linksmockup.base_url+'/'+ojblink.url
+ } 
+}
+
+}
   let temp2=res.map(function(i,a){
 
-return `<a href="${(i.url==null)?'#':i.url}" rel="noreferrer" target="_blank">
-                                <li href="${(i.url==null)?'#':i.url}" class="ant-list-item social-item">
+return `<a href="${providerLink(i)}" rel="noreferrer" target="_blank">
+                                <li href="${providerLink(i)}" class="ant-list-item social-item">
                                   <div class="ant-list-item-meta">
                                     <div class="ant-list-item-meta-avatar">
                                      
@@ -294,6 +308,8 @@ async function doAjaxSaveOrderData(args) {
 
 $('.addsociallink').click(function(){
 let linktype= $('.linktype').val();
+let slug=$('option:selected').attr('slug-fil');
+ 
 if(isEmpty(linktype)){
 toastr.error('Share Link Cannot be Empty')
 }else{
@@ -301,7 +317,7 @@ $.ajax({
 url:"{{ route('links_ajax_user_save') }}",
 type:"POST",
 dataType:"json",
-data:{link_id:linktype,_token:"{{ csrf_token() }}"},
+data:{link_id:linktype,slug:slug,_token:"{{ csrf_token() }}"},
 success:function(res)
 {
 if(res.status=='ok'){
@@ -328,6 +344,27 @@ $('.tempOne').hide();
 $('.temptwo').show();
 $('.public-profile-wrap').removeClass('pt-5');
 });
+
+
+
+    $(".updatesavelinkdata").click(function(){
+    $.ajax({
+url:"{{ route('links_ajax_user_order_data_save') }}",
+type:"POST",
+dataType:"json",
+data:$("#mangelinksDataSave input").serialize(),
+           
+            success: function(response){
+               if(response.status=='ok'){
+
+               toastr.success('Share Link Data Update Successfully...!')
+               getShareLinkData();
+               }
+            }
+        });
+    });
+ 
+
 });
 </script>
 <style type="text/css">

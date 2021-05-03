@@ -50,7 +50,7 @@
                 <div class="form-group row">
                   <label  class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
                   <div class="col-md-6">
-                    <input type="email" class="form-control" name="email" value="{{$user->email}}"  required/>
+                    <input type="email" class="form-control" name="email" value="{{$user->email}}"  readonly="" />
                     @if ($errors->has('email')) 
                     <span class="invalid-feedback" role="alert">
                       <strong class="form-text text-muted text-danger">{{ $errors->first('email') }}</strong>
@@ -74,7 +74,7 @@
                  <div class="form-group row">
                   <label  class="col-md-4 col-form-label text-md-right">Phone</label>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="phone" value="{{$user->phone}}"  required/>
+                    <input type="text" class="form-control" name="phone" value="{{$user->phone}}"  />
                     @if ($errors->has('phone')) 
                     <span class="invalid-feedback" role="alert">
                       <strong class="form-text text-muted text-danger">{{ $errors->first('phone') }}</strong>
@@ -88,7 +88,7 @@
                  <div class="form-group row">
                   <label  class="col-md-4 col-form-label text-md-right">About</label>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="about" value="{{$user->about}}"  required/>
+                    <input type="text" class="form-control" name="about" value="{{$user->about}}"  />
                     @if ($errors->has('about')) 
                     <span class="invalid-feedback" role="alert">
                       <strong class="form-text text-muted text-danger">{{ $errors->first('about') }}</strong>

@@ -216,6 +216,7 @@ class ComposerStaticInit7b5a75eb252323e8a5fb41f9d682f101
         'J' => 
         array (
             'JmesPath\\' => 9,
+            'JeroenDesloovere\\VCard\\' => 23,
         ),
         'I' => 
         array (
@@ -269,6 +270,7 @@ class ComposerStaticInit7b5a75eb252323e8a5fb41f9d682f101
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'Behat\\Transliterator\\' => 21,
             'Balping\\JsonRaw\\' => 16,
         ),
         'A' => 
@@ -552,6 +554,10 @@ class ComposerStaticInit7b5a75eb252323e8a5fb41f9d682f101
         array (
             0 => __DIR__ . '/..' . '/mtdowling/jmespath.php/src',
         ),
+        'JeroenDesloovere\\VCard\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jeroendesloovere/vcard/src',
+        ),
         'Illuminate\\Foundation\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/ui/auth-backend',
@@ -680,6 +686,10 @@ class ComposerStaticInit7b5a75eb252323e8a5fb41f9d682f101
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
+        'Behat\\Transliterator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/behat/transliterator/src/Behat/Transliterator',
+        ),
         'Balping\\JsonRaw\\' => 
         array (
             0 => __DIR__ . '/..' . '/balping/json-raw-encoder/src',
@@ -736,6 +746,7 @@ class ComposerStaticInit7b5a75eb252323e8a5fb41f9d682f101
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Customize' => __DIR__ . '/../..' . '/app/Customize.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Exports\\UsersExport' => __DIR__ . '/../..' . '/app/Exports/UsersExport.php',
         'App\\Http\\Controllers\\Account\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Account/ProfileController.php',
         'App\\Http\\Controllers\\AdminUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminUserController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -767,6 +778,7 @@ class ComposerStaticInit7b5a75eb252323e8a5fb41f9d682f101
         'App\\Http\\Middleware\\UservalidationControll2' => __DIR__ . '/../..' . '/app/Http/Middleware/UservalidationControll2.php',
         'App\\Http\\Middleware\\ValidatePostExist' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidatePostExist.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Imports\\UsersImport' => __DIR__ . '/../..' . '/app/Imports/UsersImport.php',
         'App\\LinkMockups' => __DIR__ . '/../..' . '/app/LinkMockups.php',
         'App\\Linkorder' => __DIR__ . '/../..' . '/app/Linkorder.php',
         'App\\Links' => __DIR__ . '/../..' . '/app/Links.php',
@@ -1563,6 +1575,8 @@ class ComposerStaticInit7b5a75eb252323e8a5fb41f9d682f101
         'Balping\\JsonRaw\\Encoder' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Encoder.php',
         'Balping\\JsonRaw\\Raw' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Raw.php',
         'Balping\\JsonRaw\\Replacer' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Replacer.php',
+        'Behat\\Transliterator\\SyncTool' => __DIR__ . '/..' . '/behat/transliterator/src/Behat/Transliterator/SyncTool.php',
+        'Behat\\Transliterator\\Transliterator' => __DIR__ . '/..' . '/behat/transliterator/src/Behat/Transliterator/Transliterator.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -3757,6 +3771,9 @@ class ComposerStaticInit7b5a75eb252323e8a5fb41f9d682f101
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'JeroenDesloovere\\VCard\\VCard' => __DIR__ . '/..' . '/jeroendesloovere/vcard/src/VCard.php',
+        'JeroenDesloovere\\VCard\\VCardException' => __DIR__ . '/..' . '/jeroendesloovere/vcard/src/VCardException.php',
+        'JeroenDesloovere\\VCard\\VCardParser' => __DIR__ . '/..' . '/jeroendesloovere/vcard/src/VCardParser.php',
         'JmesPath\\AstRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/AstRuntime.php',
         'JmesPath\\CompilerRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/CompilerRuntime.php',
         'JmesPath\\DebugRuntime' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/DebugRuntime.php',

@@ -7,6 +7,8 @@ use App\Links;
 use App\LinkMockups;
 use Auth;
 use App\Linkorder;
+use App\User;
+use JeroenDesloovere\VCard\VCard;
 class LinksController extends Controller
 {
     
@@ -48,18 +50,22 @@ public function links_ajax_shareLink_get(Request $requset){
 
  $sharelinksOrder=Linkorder::where('user_id',Auth::user()->id);
 
- $pattranArray = explode(',',$sharelinksOrder->first()->order);
 
-
-
-  if ($sharelinksOrder->count()>0 &&  !empty($sharelinksOrder->first()->order)) {
-   	
+  if (!empty($sharelinksOrder->first())) {
+    if (!empty($sharelinksOrder->first()->order)) {
+      
+     $pattranArray = explode(',',$sharelinksOrder->first()->order);
     foreach ($pattranArray as $value) {
       $orderArray[]= Links::with('linksmockup')->where('user_id',Auth::user()->id)->where('link_mock_id',$value)->first();
     }
    
    // print_r($orderArray);
    $objectRet= $orderArray;
+
+    }else {
+      $objectRet=$sharelinks;
+    }
+   	
 
    }else {
    	
@@ -71,20 +77,37 @@ public function links_ajax_shareLink_get(Request $requset){
 
  
 
-public function links_ajax_shareLink_get_order_display(Request $requset){
+public function links_ajax_shareLink_get_order_display($id){
 
-$sharelinks=Links::with('linksmockup')->where('user_id',Auth::user()->id)->get();
 
- $sharelinksOrder=Linkorder::where('user_id',Auth::user()->id);
-  if ($sharelinksOrder->count()>0 &&  !empty($sharelinksOrder->first()->order)) {
+   $profileID=$id;
+  $orderArray=array();
+  $sharelinks=Links::with('linksmockup')->where('user_id',$profileID)->get();
+
+ $sharelinksOrder=Linkorder::where('user_id',$profileID);
+
+
+  if (!empty($sharelinksOrder->first())) {
+    if (!empty($sharelinksOrder->first()->order)) {
+      
+     $pattranArray = explode(',',$sharelinksOrder->first()->order);
+    foreach ($pattranArray as $value) {
+      $orderArray[]= Links::with('linksmockup')->where('user_id',$profileID)->where('link_mock_id',$value)->first();
+    }
+   
+   // print_r($orderArray);
+   $objectRet= $orderArray;
+
+    }else {
+      $objectRet=$sharelinks;
+    }
     
-   $objectRet='';
 
    }else {
     
      $objectRet=$sharelinks;
    }
-  return json_encode( $objectRet);
+  return json_encode($objectRet);
 } 
 
 
@@ -140,9 +163,9 @@ if (isset($request->bccolor)) {
 
    if ($orderSetting>0) {
    
-  Linkorder::where('user_id',Auth::user()->id)->update(['bgimg'=>'']);
+  Linkorder::where('user_id',Auth::user()->id)->update(['bgimg'=>Null]);
 }else {
-   Linkorder::create(['user_id'=>Auth::user()->id,'bgimg'=>'']);
+   Linkorder::create(['user_id'=>Auth::user()->id,'bgimg'=>Null]);
 }
   
 }elseif(isset($request->temp)) {
@@ -200,5 +223,34 @@ return redirect()->back()->with('message','Background Image Set Successfully');
 
 }
 
+
+
+
+public function saveVacard($id){
+
+
+$UDATA=User::where('id',$id);
+if ($UDATA->count()>0) {
+
+$userData=$UDATA->first();
+$vcard = new VCard();
+$lastname ='';
+$firstname =$userData->name;
+$additional ='';
+$prefix = '';
+$suffix = '';
+  
+// add personal data
+$vcard->addName($firstname, $additional, $prefix, $suffix);
+$vcard->addEmail($userData->email);
+$vcard->addPhoneNumber($userData->phone);
+$vcard->addURL(route('front-home').'/'.$userData->username);
+
+return $vcard->download();
+}else {
+  return redirect()->back()->with('error','Data Not Found...!');
+}
+
+}
 
 }

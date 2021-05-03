@@ -155,14 +155,15 @@ Route::post('links_ajax_user_Template_save', 'LinksController@links_ajax_user_Te
 
 Route::post('links_ajax_user_Template_backgroun_img', 'LinksController@links_ajax_user_Template_backgroun_img')->name('links_ajax_user_Template_backgroun_img');
 
-Route::get('links_ajax_shareLink_get_order_display', 'LinksController@links_ajax_shareLink_get_order_display')->name('links_ajax_shareLink_get_order_display');
 // myaccount Page Route End
 
 }); 
 });  
+   
 
+Route::get('links_ajax_shareLink_get_order_display/{id}', 'LinksController@links_ajax_shareLink_get_order_display')->name('links_ajax_shareLink_get_order_display');
 
-
+Route::get('saveVacard/{id}', 'LinksController@saveVacard')->name('saveVacard');
 
 // Route::get('command', function () {
     

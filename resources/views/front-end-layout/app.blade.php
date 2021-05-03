@@ -28,7 +28,7 @@
                             </h3></div>
                             <div class="AppBar_grow__gkU4D"></div>
                             <div class="AppBar_sectionDesktop__2RfQ-">
-                                <p class="MuiTypography-root AppBar_accountIconArea__3_JNJ MuiTypography-body1 MuiTypography-noWrap">
+                                <p class="MuiTypography-root AppBar_accountIconArea__3_JNJ MuiTypography-body1 MuiTypography-noWrap droplogmenu">
 
                                      @if (!empty(Auth::user()->image))
                                                      <img src="{{ asset('assets/img') }}/{{ Auth::user()->image }}"
@@ -76,7 +76,7 @@
         <script type="text/javascript">
             
             $(document).ready(function(){
-  $(".AppBar_accountIconLabel__dChZM").click(function(){
+  $(".droplogmenu").click(function(){
     $(".dropmenu").toggleClass("show");
   });
 });

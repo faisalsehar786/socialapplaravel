@@ -7,7 +7,7 @@
 @php
   $metepage=App\Settings::first();
 @endphp
-{{  $metepage->login_page_meta }}
+{!!$metepage->login_page_meta !!}
 @endsection
 @section('title', 'Login')
 @section('content')

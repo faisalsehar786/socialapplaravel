@@ -5,7 +5,7 @@
   $metepage=App\Settings::first();
 @endphp
 @section('page_meta')
-{{  $metepage->activation_page_meta }}
+{!!$metepage->activation_page_meta !!}
 @endsection
 @section('content')
 

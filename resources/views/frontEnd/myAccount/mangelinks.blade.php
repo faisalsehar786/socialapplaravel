@@ -5,7 +5,7 @@
 @php
   $metepage=App\Settings::first(); 
 @endphp 
-{{  $metepage->mangelinks_page_meta }}
+{!!$metepage->mangelinks_page_meta !!}
 @endsection
 @section('title', 'Mange Links')
 @section('content')
@@ -111,11 +111,11 @@
     </div>
   </div>
 </div> @endsection @section("footer") @parent
-<link href="{{ asset('frontend/assets') }}/css/mangeprofile.css" rel="stylesheet" />
+{{-- <link href="{{ asset('frontend/assets') }}/css/mangeprofile.css" rel="stylesheet" />
 <link href="{{ asset('frontend/assets') }}/css/mangeprofilemain.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/afterlogin.css">
-<link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/afterloginheader.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/afterloginheader.css"> --}}
+<script src="{{ asset('frontend/assets') }}/js/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
 $( document ).ready(function() {

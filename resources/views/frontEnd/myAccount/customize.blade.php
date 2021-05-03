@@ -7,7 +7,7 @@
   $metepage=App\Settings::first();
   $Lorder=App\Linkorder::where('user_id',Auth::user()->id);
 @endphp
-{{  $metepage->customize_page_meta }}
+{!!$metepage->customize_page_meta !!}
 @endsection
 @section('title', 'Customize Account')
 @section('content')
@@ -335,13 +335,12 @@ background-size: contain;
 @endsection
 @section("footer")
 @parent
-<link href="{{ asset('frontend/assets') }}/css/customize.css" rel="stylesheet" />
-<link href="{{ asset('frontend/assets') }}/css/customizeheader.css" rel="stylesheet" />
-<link href="{{ asset('frontend/assets') }}/css/mangeprofile.css" rel="stylesheet" />
+
+{{-- <link href="{{ asset('frontend/assets') }}/css/mangeprofile.css" rel="stylesheet" />
 <link href="{{ asset('frontend/assets') }}/css/mangeprofilemain.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/afterlogin.css">
 <link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/afterloginheader.css">
-
+ --}}
 <script type="text/javascript">
 $( document ).ready(function() {
 function getShareLinkData(){

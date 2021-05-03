@@ -2,26 +2,22 @@
 @extends('front-end-layout.login_register_layout')
 @section('page_meta')
 @php
-  $metepage=App\Settings::first();
+$metepage=App\Settings::first();
 @endphp
-{{  $metepage->login_page_meta }}
+{!!$metepage->login_page_meta !!}
 @endsection
 @section('title', 'Login')
 @section('content')
 <main class="ant-layout-content app-login p-15">
     <h1 class="logo">
-
-        
- @php
-                          $settings=App\Settings::first(); 
-
-                         @endphp
-                         @if (isset($settings) && !empty($settings->headerlogo))
-                          <img src="{{ asset('frontend/assets') }}/img/{{ $settings->headerlogo }}" class="mt-5" alt="Logo">
-                         @else
-                          <img src="{{ asset('frontend/assets') }}/img/footer-logo.png" alt="Logo">
-                         @endif
-
+    @php
+    $settings=App\Settings::first();
+    @endphp
+    @if (isset($settings) && !empty($settings->headerlogo))
+    <img src="{{ asset('frontend/assets') }}/img/{{ $settings->headerlogo }}" class="mt-5" alt="Logo">
+    @else
+    <img src="{{ asset('frontend/assets') }}/img/footer-logo.png" alt="Logo">
+    @endif
     </h1>
     <div class="ant-row">
         <div class="ant-col ant-col-24">
@@ -31,7 +27,7 @@
                     <h1 class="login-title" @if(isset($settings) && !empty($settings->borderpanelcolor)) style="background:{{ $settings->borderpanelcolor }} !important" @endif>Signin</h1>
                     <div class="p-15">
                         {{--   ////////////////////////////////////////////////////////////////     --}}
-                      <div type="username" class="ant-row ant-form-item ant-form-item-with-help ant-form-item-has-error">
+                        <div type="username" class="ant-row ant-form-item ant-form-item-with-help ant-form-item-has-error">
                             <div class="ant-col ant-col-16 ant-form-item-control">
                                 <div class="ant-form-item-control-input">
                                     <div class="ant-form-item-control-input-content">

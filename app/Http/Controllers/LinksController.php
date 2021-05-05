@@ -192,15 +192,33 @@ return json_encode(['status'=>'ok']);
 
  
 public function links_ajax_user_Template_backgroun_img(Request $request){
+
+
      
-      $request->validate([
-            'backgroundImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+      // $request->validate([
+      //       'backgroundImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             
-        ]);
+      //   ]);
 
-    
+    if (!empty($request->file('file'))) {
+  
 
-      $orderSetting=Linkorder::where('user_id',Auth::user()->id)->count();
+
+        $image = $request->file('file');
+       if (!empty( $image)) {
+             $image = $request->file('file');
+            $image_name = time() . uniqid(). '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('frontend/assets/img/');
+            $image->move($destinationPath, $image_name);
+       }
+   
+    $headerlogo=$image_name;
+
+     }else {
+  
+
+
+     
 
        $headerlogo = $request->headerlogoimagehidden;
         $headerlogoimage = $request->file('backgroundImage');
@@ -211,7 +229,9 @@ public function links_ajax_user_Template_backgroun_img(Request $request){
             $headerlogoimage->move($headerlogoimagedestinationPath, $headerlogo);
        }
 
+       }
 
+ $orderSetting=Linkorder::where('user_id',Auth::user()->id)->count();
         if ($orderSetting>0) {
    
   Linkorder::where('user_id',Auth::user()->id)->update(['bgimg'=>$headerlogo]);

@@ -69,8 +69,19 @@ id="showProfileImage2"
 <span class="">
 <div class="ant-upload ant-upload-select ant-upload-select-text">
 <span tabindex="0" class="ant-upload" role="button">
+<div class="file-drop-area">
+  <span class="fake-btn"></span>
+  <span class="file-msg"></span>
+  <form  method="POST"  id="Profilepicchange" action="{{ route('updateUserData') }}" enctype="multipart/form-data">
+@csrf
+  <input class="file-input" type="file"  name="file" accept="image/png, image/jpeg" id="cclikFile" >
+  <input type="hidden" name="imagehidden" style="display: none;" value="{{ Auth::user()->image }}">
+</form> 
+   </div>
+
 
 <button type="button" class="ant-btn ant-btn-icon-only upload-btn"><img class="icon-camera" src="{{ asset('frontend/assets') }}/img/camera.png" alt="camera"></button>
+
 </span>
 </div>
 <div class="ant-upload-list ant-upload-list-text"></div>
@@ -80,8 +91,8 @@ id="showProfileImage2"
 <h1 class="title">EDIT INFORMATION</h1>
 <form id="nest-messages" class="ant-form ant-form-horizontal" method="POST" action="{{ route('updateUserData') }}" enctype="multipart/form-data">
 @csrf
-<input type="file" accept="image/png, image/jpeg" name="image" style="display: none;" id="cclikFile">
-<input type="hidden" name="imagehidden" style="display: none;" value="{{ Auth::user()->image }}">
+{{-- <input type="file" accept="image/png, image/jpeg" class="file-inputAssign" name="image" style="display: none;" id="cclikFile">
+<input type="hidden" name="imagehidden" style="display: none;" value="{{ Auth::user()->image }}"> --}}
 <div class="title-overlay">
 <div class="ant-row ant-form-item">
 <div class="ant-col ant-col-8 ant-form-item-label"><label for="nest-messages_user_fullName" class="ant-form-item-required" title="Your name">
@@ -145,10 +156,13 @@ Your name</label></div>
 @endsection
 @section("footer")
 @parent
-<link href="{{ asset('frontend/assets') }}/css/mangeprofile.css" rel="stylesheet" />
+{{-- <link href="{{ asset('frontend/assets') }}/css/mangeprofile.css" rel="stylesheet" />
 <link href="{{ asset('frontend/assets') }}/css/mangeprofilemain.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/afterlogin.css">
-<link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/afterloginheader.css">
+<link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/ afterloginheader.css"> --}}
+
+
+<script src="{{ asset('js') }}/sweetalert.min.js"></script>
 <script type="text/javascript">
 function readURL(input) {
 if (input.files && input.files[0]) {
@@ -162,6 +176,20 @@ $('.profilecimg').attr('src', e.target.result);
 }
 
 reader.readAsDataURL(input.files[0]); // convert to base64 string
+swal({
+title: "Are you sure Want To Change Profile Picture...!?",
+text: "",
+icon: "warning",
+buttons: true,
+dangerMode: true,
+})
+.then((willDelete) => {
+if (willDelete) {
+ 
+$('#Profilepicchange').submit();
+}
+})
+
 }
 }
 $( ".upload-btn" ).click(function() {
@@ -232,9 +260,99 @@ $('.tempOne').hide();
 $('.temptwo').show();
 $('.public-profile-wrap').removeClass('pt-5');
 });
+
+var $fileInput = $('.file-input');
+var $droparea = $('.file-drop-area');
+
+// highlight drag area
+$fileInput.on('dragenter focus click', function() {
+  $droparea.addClass('is-active');
+});
+
+// back to normal state
+$fileInput.on('dragleave blur drop', function() {
+  $droparea.removeClass('is-active');
+});
+
+
+// change inner text
+$fileInput.on('change', function() {
+  var filesCount = $(this)[0].files.length;
+  var $textContainer = $(this).prev();
+ 
+
+  if (filesCount === 1) {
+    // if single file is selected, show file name
+    var fileName = $(this).val().split('\\').pop();
+    //$textContainer.text(fileName);
+
+ 
+  
+
+    readURL(this) 
+    
+  } else {
+    // otherwise show number of files
+    //$textContainer.text(filesCount + ' files selected');
+  }
+});
+
+
 });
 </script>
 <style type="text/css">
+
+
+.file-drop-area {
+  height: 160px;
+    position: relative;
+    display: flex;
+    top: -81px;
+    left: -202px;
+  align-items: center;
+  width: 450px;
+  max-width: 100%;
+  padding: 25px;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  transition: 0.2s;
+  &.is-active {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.fake-btn {
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: 8px 15px;
+  margin-right: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.file-msg {
+  font-size: small;
+  font-weight: 300;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+  &:focus {
+    outline: none;
+  }
+}
 .anticon {
 display: inline-block;
 color: inherit;

@@ -169,6 +169,15 @@
 <div class="CustomizeBackground_mobileView__ilUXN">
 <div class="CustomizeBackground_mobileViewOpacityBackground__27h6-" style="background: rgb(255, 255, 255);"></div>
 <div class="CustomizeBackground_mobileViewBackground__1enJS" style="">
+<div class="file-drop-area">
+  <span class="fake-btn"></span>
+  <span class="file-msg"></span>
+  <form  method="POST"  id="backgroundImgchange" action="{{ route('links_ajax_user_Template_backgroun_img') }}" enctype="multipart/form-data">
+@csrf
+  <input class="file-input" type="file"  name="file" accept="image/png, image/jpeg"  >
+ 
+</form> 
+   </div> 
 <img
 alt="upload preview"
 @if (!empty($Lorder->first()->bgimg))
@@ -335,7 +344,7 @@ background-size: contain;
 @endsection
 @section("footer")
 @parent
-
+<script src="{{ asset('js') }}/sweetalert.min.js"></script>
 {{-- <link href="{{ asset('frontend/assets') }}/css/mangeprofile.css" rel="stylesheet" />
 <link href="{{ asset('frontend/assets') }}/css/mangeprofilemain.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/afterlogin.css">
@@ -481,6 +490,22 @@ $('.public-profile-wrap').css('background-image', 'url(' + e.target.result + ')'
 }
 
 reader.readAsDataURL(input.files[0]); // convert to base64 string
+
+
+
+swal({
+title: "Are you sure Want To Change Background Image...!?",
+text: "",
+icon: "warning",
+buttons: true,
+dangerMode: true,
+})
+.then((willDelete) => {
+if (willDelete) {
+ 
+$('#backgroundImgchange').submit();
+}
+})
 }
 }
 $(".CustomizeBackground_btnAddImage__16qi7" ).click(function() {
@@ -488,9 +513,47 @@ $(".CustomizeBackground_btnAddImage__16qi7" ).click(function() {
 
 // $("#file-ip-1").trigger('click');
 $("#file-ip-1").change(function(e) {
-readURL(this);
+readURL(this); 
 });
 });
+
+
+var $fileInput = $('.file-input');
+var $droparea = $('.file-drop-area');
+
+// highlight drag area
+$fileInput.on('dragenter focus click', function() {
+  $droparea.addClass('is-active');
+});
+
+// back to normal state
+$fileInput.on('dragleave blur drop', function() {
+  $droparea.removeClass('is-active');
+});
+
+
+// change inner text
+$fileInput.on('change', function() {
+  var filesCount = $(this)[0].files.length;
+  var $textContainer = $(this).prev();
+ 
+
+  if (filesCount === 1) {
+    // if single file is selected, show file name
+    var fileName = $(this).val().split('\\').pop();
+    //$textContainer.text(fileName);
+
+ 
+  
+
+    readURL(this) 
+    
+  } else {
+    // otherwise show number of files
+    //$textContainer.text(filesCount + ' files selected');
+  }
+});
+
 
 });
 
@@ -498,7 +561,56 @@ readURL(this);
 
 </script>
 <style type="text/css">
+.file-drop-area {
+  position: absolute;
+    display: flex;
+    top: -3px;
+    left: -1px;
+    height: 189px;
+  align-items: center;
+  width: 450px;
+  max-width: 100%;
+  padding: 25px;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  transition: 0.2s;
+  &.is-active {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
 
+.fake-btn {
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: 8px 15px;
+  margin-right: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.file-msg {
+  font-size: small;
+  font-weight: 300;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+  &:focus {
+    outline: none;
+  }
+}
 .CustomizeBackground_colorCircle__3NJtl {
 width: 19px;
 height: 19px;

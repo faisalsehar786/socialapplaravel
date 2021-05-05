@@ -17,27 +17,48 @@ public function index(){
 
 public function updateUserData(Request $request){
    
+  
 
- $image_name = $request->imagehidden;
-        $image = $request->file('image');
+if (!empty($request->file('file')) || !empty($request->imagehidden)) {
+  
+
+  $image_name = $request->imagehidden;
+        $image = $request->file('file');
        if (!empty( $image)) {
-       	     $image = $request->file('image');
+             $image = $request->file('file');
             $image_name = time() . uniqid(). '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('assets/img/');
             $image->move($destinationPath, $image_name);
        }
 
-   // 
+
+  $updateUser=User::where('id',Auth::user()->id);
+  $updateUser->update([
+        'image' =>$image_name,
+        ]); 
+
+ return redirect()->back()->with('message','Profile Picture Update Successfully !');
+
+}else {
+
+
   $updateUser=User::where('id',Auth::user()->id);
   $updateUser->update([
         'name' =>$request->name,
         'phone' =>$request->phone,
         'about' =>$request->about,
-        'image' =>$image_name,
+        // 'image' =>$image_name,
        
         ]); 
 
-	return redirect()->back()->with('message','Profile Update Successfully !');
+  return redirect()->back()->with('message','Profile Update Successfully !');
+  
+}
+
+ 
+
+   // 
+  
 }
 
 

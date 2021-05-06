@@ -28,8 +28,8 @@
                               <img src="{{ asset('frontend/assets/img/') }}/{{$settings->headerlogo }}" alt="" class="img-fluid" style="max-width: 189px;height: auto;">
                             </h3></div>
                             <div class="AppBar_grow__gkU4D"></div>
-                            <div class="AppBar_sectionDesktop__2RfQ-">
-                                <p class="MuiTypography-root AppBar_accountIconArea__3_JNJ MuiTypography-body1 MuiTypography-noWrap droplogmenu">
+                            <div class="AppBar_sectionDesktop__2RfQ- droplogmenu">
+                                <p class="MuiTypography-root AppBar_accountIconArea__3_JNJ MuiTypography-body1 MuiTypography-noWrap">
 
                                      @if (!empty(Auth::user()->image))
                                                      <img src="{{ asset('assets/img') }}/{{ Auth::user()->image }}"
@@ -59,7 +59,7 @@
                 </div>
             
                                     
-<span class="AppBar_accountIconLabel__dChZM">{{ Auth::user()->username }}</span>
+<span class="AppBar_accountIconLabel__dChZM">{{ Auth::user()->usernanme_by_user }}</span>
                                 </p>
                             </div>
                         </div>
@@ -73,7 +73,13 @@
                 @yield('footer')
             </div>
         </div>
+<style type="text/css">
+  
+  .EditProfile_profilePreviewArea__IAV__ {
+     display: block !important;
 
+    }
+</style>
         <script type="text/javascript">
             
             $(document).ready(function(){

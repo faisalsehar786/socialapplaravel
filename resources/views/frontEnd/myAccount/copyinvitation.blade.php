@@ -2,10 +2,10 @@
 	$userLinker=App\User::where('id',Auth::user()->id)->first();
 @endphp
 <h3 class="CopyLink_copyLinkTitle__3Yykr">Your Link:</h3>
-<h3 class="CopyLink_accountUrl__2ZKBH">{{ route('front-home') }}/{{ $userLinker->username }}</h3>
+<h3 class="CopyLink_accountUrl__2ZKBH">{{ route('front-home') }}/{{ $userLinker->usernanme_by_user }}</h3>
 <div class="CopyLink_buttonContainer__2woX2">
 <p id="texttocopy" style="display: none;"> 
-{{ route('front-home') }}/{{ $userLinker->username }}
+{{ route('front-home') }}/{{ $userLinker->usernanme_by_user }}
 </p>
 
 <div class="CopyLink_copyLinkButton__HAu09" onclick="copyToClipboard('#texttocopy')">
@@ -18,7 +18,7 @@ class="CopyLink_IconCopy__3_2V1"
 Copy Link
 </div>
 
-<a  href="{{ route('front-home') }}/{{ $userLinker->username }}" target="_blank" class="MuiButtonBase-root MuiButton-root MuiButton-contained CopyLink_seePageButton__nj4r6 MuiButton-containedPrimary" tabindex="0" type="button">
+<a  href="{{ route('front-home') }}/{{ $userLinker->usernanme_by_user }}" target="_blank" class="MuiButtonBase-root MuiButton-root MuiButton-contained CopyLink_seePageButton__nj4r6 MuiButton-containedPrimary" tabindex="0" type="button">
 <span class="MuiButton-label"><i class="far fa-eye" aria-hidden="true"></i> View Page</span><span class="MuiTouchRipple-root"></span>
 </a>
 </div>

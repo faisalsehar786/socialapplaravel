@@ -51,7 +51,7 @@
                                     <div class="ant-form-item-control-input-content">
                                         <span class="input-background" id="basic_username" value="">
                                             <div class="img-wrap"><img class="icon anticon" src="{{ asset('frontend/assets') }}/img/person.svg" alt="person"></div>
-            <input  type="text"  class="ant-input input @error('username') is-invalid @enderror" name="username" value="{{ $username }}" required autocomplete="username" autofocus placeholder="JohnDoe">
+            <input  type="text"  class="ant-input input @error('username') is-invalid @enderror" name="username"  required autocomplete="username" autofocus placeholder="JohnDoe">
                                         </span>
                                     </div>
                                 </div>

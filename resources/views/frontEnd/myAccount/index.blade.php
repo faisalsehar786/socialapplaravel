@@ -152,10 +152,41 @@ Your name</label></div>
 </div>
 </div>
 </div>
+<div id="insertimageModal" class="modal" role="dialog">
+ <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+
+      <div class="modal-body">
+       
+            @csrf
+            <div class="row text-center">
+              <div class="col-md-12 text-center ">
+                <div id="image-preview"></div>
+              
+               {{--  <p><label>Select Image</label></p> --}}
+               {{--  <input type="file" name="upload_image" id="upload_image" />
+                <br />
+                <br /> --}}
+              
+
+                </div>
+     
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-success crop_image">Crop & Upload Image</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection
 @section("footer")
 @parent
+
+
+
+
 {{-- <link href="{{ asset('frontend/assets') }}/css/mangeprofile.css" rel="stylesheet" />
 <link href="{{ asset('frontend/assets') }}/css/mangeprofilemain.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/afterlogin.css">
@@ -163,7 +194,64 @@ Your name</label></div>
 
 
 <script src="{{ asset('js') }}/sweetalert.min.js"></script>
+<script src="{{ asset('frontend/assets') }}/js/crope.js"></script>
+<link href="{{ asset('frontend/assets') }}/css/crope.css" rel="stylesheet" />
+
 <script type="text/javascript">
+
+$(document).ready(function(){
+  
+  $image_crop = $('#image-preview').croppie({
+    enableExif:true,
+    viewport:{
+      width:200,
+      height:200,
+      type:'circle'
+    },
+    boundary:{
+      width:300,
+      height:300
+    }
+  });
+
+  $('.file-input').change(function(){
+    var reader = new FileReader();
+
+    reader.onload = function(event){
+      $image_crop.croppie('bind', {
+        url:event.target.result
+      }).then(function(){
+        console.log('jQuery bind complete');
+      });
+    }
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  $('.crop_image').click(function(event){
+    $image_crop.croppie('result', {
+      type:'canvas', 
+      size:'viewport'
+    }).then(function(response){
+      var _token = $('input[name=_token]').val();
+      $.ajax({
+        url:'{{ route('updateUserData') }}',
+        type:'post', 
+        data:{"file":response, _token:_token},
+        dataType:"json",
+        success:function(data)
+        {
+
+         if(data.status=='ok'){
+          location.reload();
+         }
+          // var crop_image = '<img src="'+data.path+'" />';
+          // $('#uploaded_image').html(crop_image);
+        }
+      });
+    });
+  });
+  
+});  
 function readURL(input) {
 if (input.files && input.files[0]) {
 var reader = new FileReader();
@@ -176,19 +264,23 @@ $('.profilecimg').attr('src', e.target.result);
 }
 
 reader.readAsDataURL(input.files[0]); // convert to base64 string
-swal({
-title: "Are you sure Want To Change Profile Picture...!?",
-text: "",
-icon: "warning",
-buttons: true,
-dangerMode: true,
-})
-.then((willDelete) => {
-if (willDelete) {
+
+
+$('#insertimageModal').modal('show');
+
+// swal({
+// title: "Are you sure Want To Change Profile Picture...!?",
+// text: "",
+// icon: "warning",
+// buttons: true,
+// dangerMode: true,
+// })
+// .then((willDelete) => {
+// if (willDelete) {
  
-$('#Profilepicchange').submit();
-}
-})
+// $('#Profilepicchange').submit();
+// }
+// })
 
 }
 }

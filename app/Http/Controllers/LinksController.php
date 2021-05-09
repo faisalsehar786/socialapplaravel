@@ -7,6 +7,7 @@ use App\Links;
 use App\LinkMockups;
 use Auth;
 use App\Linkorder;
+use Illuminate\Http\Response;
 use App\User;
 use JeroenDesloovere\VCard\VCard;
 class LinksController extends Controller
@@ -17,7 +18,7 @@ public function links_ajax_user_save(Request $requset){
 
 
 if (Links::where('link_mock_id',$requset->link_id)->where('user_id',Auth::user()->id)->count()>0) {
-  return json_encode(['status'=>'exist']);	
+  return json_encode(['status'=>'exist']);  
 
 }else {
   $countC=Linkorder::where('user_id',Auth::user()->id);
@@ -25,7 +26,7 @@ if (Links::where('link_mock_id',$requset->link_id)->where('user_id',Auth::user()
     $countC->update(['order'=>$countC->first()->order.','.$requset->link_id]);
   }
  Links::create(['link_mock_id'=>$requset->link_id,'name'=>$requset->slug,'user_id'=>Auth::user()->id]);
-	 return json_encode(['status'=>'ok']);	
+   return json_encode(['status'=>'ok']);  
 }
 
 } 
@@ -65,13 +66,13 @@ public function links_ajax_shareLink_get(Request $requset){
     }else {
       $objectRet=$sharelinks;
     }
-   	
+    
 
    }else {
-   	
-   	 $objectRet=$sharelinks;
+    
+     $objectRet=$sharelinks;
    }
-	return json_encode($objectRet);
+  return json_encode($objectRet);
 }
 
 
@@ -252,21 +253,71 @@ public function saveVacard($id){
 $UDATA=User::where('id',$id);
 if ($UDATA->count()>0) {
 
-$userData=$UDATA->first();
+
+  // define vcard
 $vcard = new VCard();
+ $userData=$UDATA->first();
+// define variables
 $lastname ='';
-$firstname =$userData->name;
-$additional ='';
+$firstname = $userData->usernanme_by_user;
+$additional = '';
 $prefix = '';
 $suffix = '';
-  
+
 // add personal data
-$vcard->addName($firstname, $additional, $prefix, $suffix);
+$vcard->addName($firstname);
 $vcard->addEmail($userData->email);
 $vcard->addPhoneNumber($userData->phone);
 $vcard->addURL(route('front-home').'/'.$userData->username);
 
-return $vcard->download();
+
+// add work data
+// $vcard->addCompany('Siesqo');
+// $vcard->addJobtitle('Web Developer');
+// $vcard->addRole('Data Protection Officer');
+// $vcard->addEmail('info@jeroendesloovere.be');
+// $vcard->addPhoneNumber(1234121212, 'PREF;WORK');
+// $vcard->addPhoneNumber(123456789, 'WORK');
+// $vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
+// $vcard->addLabel('street, worktown, workpostcode Belgium');
+// $vcard->addURL('http://www.jeroendesloovere.be');
+
+
+
+// return vcard as a string
+//return $vcard->getOutput();
+
+// return vcard as a download
+//return $vcard->download();
+
+// save vcard on disk
+//$vcard->setSavePath('/path/to/directory');
+//$vcard->save();
+
+// $userData=$UDATA->first();
+// $vcard = new VCard();
+// $lastname ='';
+// $firstname =$userData->name;
+// $additional ='';
+// $prefix = '';
+// $suffix = '';
+  
+// // add personal data
+// $vcard->addName($firstname, $additional, $prefix, $suffix);
+// $vcard->addEmail($userData->email);
+// $vcard->addPhoneNumber($userData->phone);
+// $vcard->addURL(route('front-home').'/'.$userData->username);
+
+// return $vcard->download();
+
+$response = new Response();
+$response->setContent($vcard->getOutput());
+$response->setStatusCode(200);
+$response->headers->set('Content-Type', 'text/x-vcard');
+$response->headers->set('Content-Disposition', 'attachment; filename="' . $userData->name . '.vcf"');
+$response->headers->set('Content-Length', mb_strlen($vcard->getOutput(), 'utf-8'));
+
+return $response;
 }else {
   return redirect()->back()->with('error','Data Not Found...!');
 }

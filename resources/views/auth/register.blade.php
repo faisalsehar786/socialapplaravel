@@ -46,7 +46,7 @@
                     <h1 class="login-title" @if(isset($settings) && !empty($settings->borderpanelcolor)) style="background:{{ $settings->borderpanelcolor }} !important" @endif>Signup</h1>
                     <div class="p-15">
                         <div type="username" class="ant-row ant-form-item ant-form-item-with-help ant-form-item-has-error">
-                            <div class="ant-col ant-col-16 ant-form-item-control">
+                            <div class="ant-col ant-col-16 ant-form-item-control"> 
                                 <div class="ant-form-item-control-input">
                                     <div class="ant-form-item-control-input-content">
                                         <span class="input-background" id="basic_username" value="">

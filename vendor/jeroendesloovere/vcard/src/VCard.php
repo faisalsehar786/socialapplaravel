@@ -328,9 +328,9 @@ class VCard
      * @return $this
      */
     public function addName(
-        // $lastName = '',
+        $lastName = '',
         $firstName = '',
-        // $additional = '',
+        $additional = '',
         $prefix = '',
         $suffix = ''
     ) {
@@ -338,8 +338,8 @@ class VCard
         $values = array_filter([
             $prefix,
             $firstName,
-            // $additional,
-            // $lastName,
+            $additional,
+            $lastName,
             $suffix,
         ]);
 
@@ -347,9 +347,7 @@ class VCard
         $this->setFilename($values);
 
         // set property
-        // $property = $lastName . ';' . $firstName . ';' . $additional . ';' . $prefix . ';' . $suffix;
-
-        $property =$firstName .';'. $prefix . ';' . $suffix;
+        $property = $lastName . ';' . $firstName . ';' . $additional . ';' . $prefix . ';' . $suffix;
         $this->setProperty(
             'name',
             'N' . $this->getCharsetString(),
@@ -357,14 +355,14 @@ class VCard
         );
 
         // is property FN set?
-        // if (!$this->hasProperty('FN')) {
-        //     // set property
-        //     $this->setProperty(
-        //         'fullname',
-        //         'FN' . $this->getCharsetString(),
-        //         trim(implode(' ', $values))
-        //     );
-        // }
+        if (!$this->hasProperty('FN')) {
+            // set property
+            $this->setProperty(
+                'fullname',
+                'FN' . $this->getCharsetString(),
+                trim(implode(' ', $values))
+            );
+        }
 
         return $this;
     }
@@ -753,9 +751,7 @@ class VCard
     public function getHeaders($asAssociative)
     {
         $contentType = $this->getContentType() . '; charset=' . $this->getCharset();
-        // $contentDisposition = 'attachment; filename=' . $this->getFilename() . '.' . $this->getFileExtension();
-
-        $contentDisposition = 'attachment; filename=' .'Contact'. '.' . $this->getFileExtension();
+        $contentDisposition = 'attachment; filename=' . $this->getFilename() . '.' . $this->getFileExtension();
         $contentLength = mb_strlen($this->getOutput(), '8bit');
         $connection = 'close';
 
@@ -953,7 +949,7 @@ class VCard
         // adding property
         $this->properties[] = [
             'key' => $key,
-            'value' => $value
+            'value' => $value 
         ];
     }
 
